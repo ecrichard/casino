@@ -68,9 +68,14 @@ public class Dealer{
 				}
 				abet = Integer.parseInt(bet);
 			}
-			if(game() == false) {
+			boolean result = game();
+			if(result == false) {
 				System.out.println("You lose");
 				Player.setChipTotal(Player.getChipTotal()-abet);
+				System.out.println("Your now have " + Player.getChipTotal() + " chips.");
+			}
+			else if(result == true && playerScore == dealerScore) {
+				tie();
 				System.out.println("Your now have " + Player.getChipTotal() + " chips.");
 			}
 			else {
@@ -116,6 +121,7 @@ public class Dealer{
 		}
 		return null;
 	}
+	
 	public static boolean stand() {
 		d.shuffle();
 		while(count == 1 || dealerScore < 17) {
@@ -127,11 +133,16 @@ public class Dealer{
 		printPlayerScore();
 		printDealerHand();
 		printDealerScore();
-		if(playerScore == 21 || (playerScore > dealerScore && playerScore < 21) || dealerScore > 21) {
+		if(playerScore == 21 || (playerScore > dealerScore && playerScore < 21) || dealerScore > 21 || playerScore == dealerScore) {
 			return true;
 		}
 		return false;
 	}
+	
+	public static void tie() {
+		System.out.println("You tie.");
+	}
+	
 	public static void hit() {
 		d.shuffle();
 		if(count == 1) {
