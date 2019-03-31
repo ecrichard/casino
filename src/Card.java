@@ -1,4 +1,4 @@
-public class Card {
+public class Card implements Comparable<Card>{
 	private String suit;
 	private String rank;
 	private int pointValue;
